@@ -32,8 +32,7 @@ export const useRegisterForm = () => {
       if (token) {
         localStorage.setItem("token", token);
       }
-      // navigate("/auth/login");
-      navigate("/auth/register");
+      navigate("/auth/login");
     } catch (error) {
       console.log(error);
     }
