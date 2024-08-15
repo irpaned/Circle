@@ -73,7 +73,7 @@ export function CardBeranda() {
               <WrapItem>
                 <Avatar
                   position={"relative"}
-                  bottom={"2"}
+                  bottom={"1"}
                   size="md"
                   name="Ryan Florence"
                   src={currentUser.photoProfile}
