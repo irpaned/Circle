@@ -22,12 +22,15 @@ export const useFollow = (id: number) => {
     },
     onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ["suggestsKey"] });
+      queryClient.invalidateQueries({ queryKey: ["followingKey"] });
+      queryClient.invalidateQueries({ queryKey: ["followerKey"] });
       const isUnfollow = response.data.count > 0; // Prisma mengembalikan jumlah record yang dihapus pada `deleteMany`
-
+      // const isMyFollower = response.data.count > 0;
       dispatch(
         SET_USER({
           ...user,
           TotalFollowers: user.TotalFollowers + (isUnfollow ? -1 : 1),
+          // TotalFolloweds: user.TotalFolloweds + (isMyFollower ? -1 : 1),
         })
       );
     },

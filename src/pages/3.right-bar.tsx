@@ -234,7 +234,8 @@ export function RightBar() {
 
       <Card
         overflow={"scroll"}
-        height={"300px"}
+        // height={"300px"}
+        maxHeight={"300px"}
         bg="black"
         color="white"
         border="1px solid rgb(47, 51, 54)"
@@ -245,13 +246,15 @@ export function RightBar() {
         <CardHeader>
           <Heading size="md">Suggested for you</Heading>
         </CardHeader>
-        {suggests?.map((suggest) => (
-          <SuggestCard
-            key={suggest.id}
-            {...suggest}
-            isFollowing={suggest.isFollowed}
-          />
-        ))}
+        <CardBody paddingTop={0}>
+          {suggests?.map((suggest) => (
+            <SuggestCard
+              key={suggest.id}
+              {...suggest}
+              isFollowing={suggest.isFollowed}
+            />
+          ))}
+        </CardBody>
       </Card>
     </Box>
   );

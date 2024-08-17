@@ -10,7 +10,7 @@ import {
   Icon,
   Image,
   Input,
-  Link,
+  // Link,
   Spacer,
   Text,
   Textarea,
@@ -30,6 +30,7 @@ import {
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { EditProfile } from "../../../hooks/use-edit-profile";
+import { Link } from "react-router-dom";
 
 export function Profile() {
   // ini mas cundus coba apakah tombol submitnya jalan
@@ -61,8 +62,8 @@ export function Profile() {
     <Box sx={BoxCSSTop}>
       <Flex h="60px">
         <HStack>
-          <Link mt="0" href="http://localhost:5173/home" fontSize="45px">
-            <Icon mt="5" as={IoIosArrowRoundBack}></Icon>
+          <Link to="http://localhost:5173">
+            <Icon fontSize={40} mt="2" as={IoIosArrowRoundBack}></Icon>
           </Link>
           <Heading fontSize="30px">{currentUser.fullName}</Heading>
         </HStack>
