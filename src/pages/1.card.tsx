@@ -908,6 +908,8 @@ export function CardBeranda() {
             <HStack>
               <WrapItem>
                 <Avatar
+                  position={"relative"}
+                  bottom={"1"}
                   size="md"
                   name={currentUser.fullName}
                   src={currentUser.photoProfile}
