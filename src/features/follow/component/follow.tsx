@@ -6,6 +6,7 @@ import {
   Heading,
   HStack,
   Spacer,
+  Spinner,
   Tab,
   TabList,
   TabPanel,
@@ -26,12 +27,15 @@ const TabCss = {
   borderRight: "none",
   borderLeft: "none",
 };
+
 export function FollowPage() {
   const currentUser = useSelector((state: RootState) => state.auth.user);
-  const { listFollowings } = useFollowingPage(currentUser.id);
-  const { listFollowers } = useFollowerPage(currentUser.id);
-
-  console.log("cek", listFollowings);
+  const { listFollowings, isPending: isFollowingPending } = useFollowingPage(
+    currentUser.id
+  );
+  const { listFollowers, isPending: isFollowerPending } = useFollowerPage(
+    currentUser.id
+  );
 
   return (
     <Tabs mt={"0"} isFitted variant="enclosed">
@@ -64,58 +68,72 @@ export function FollowPage() {
       <TabPanels>
         <TabPanel paddingTop={0}>
           <Box>
-            {listFollowers?.followeds.map((user) => (
-              <Card backgroundColor={"transparent"}>
-                <CardBody paddingTop="0" paddingBottom="2">
-                  <Box display="flex">
-                    <HStack>
-                      <Avatar
-                        boxSize="2.5em"
-                        src={user.follower.photoProfile}
-                        name={user.follower.fullName}
-                      />
-                      <Box>
-                        <Heading size="xs" color="white">
-                          {user.follower.fullName}
-                        </Heading>
-                        <Text fontSize="sm" color="grey">
-                          @{user.follower.userName}
-                        </Text>
-                      </Box>
-                    </HStack>
-                    <Spacer />
-                  </Box>
-                </CardBody>
-              </Card>
-            ))}
+            {isFollowerPending ? (
+              <Spinner color="white" />
+            ) : (
+              listFollowers?.followeds.map((user) => (
+                <Card
+                  backgroundColor={"transparent"}
+                  key={user.follower.userName}
+                >
+                  <CardBody paddingTop="0" paddingBottom="2">
+                    <Box display="flex">
+                      <HStack>
+                        <Avatar
+                          boxSize="2.5em"
+                          src={user.follower.photoProfile}
+                          name={user.follower.fullName}
+                        />
+                        <Box>
+                          <Heading size="xs" color="white">
+                            {user.follower.fullName}
+                          </Heading>
+                          <Text fontSize="sm" color="grey">
+                            @{user.follower.userName}
+                          </Text>
+                        </Box>
+                      </HStack>
+                      <Spacer />
+                    </Box>
+                  </CardBody>
+                </Card>
+              ))
+            )}
           </Box>
         </TabPanel>
         <TabPanel paddingTop={0}>
           <Box>
-            {listFollowings?.followers.map((user) => (
-              <Card backgroundColor={"transparent"}>
-                <CardBody paddingTop="0" paddingBottom="2">
-                  <Box display="flex">
-                    <HStack>
-                      <Avatar
-                        boxSize="2.5em"
-                        src={user.followed.photoProfile}
-                        name={user.followed.fullName}
-                      />
-                      <Box>
-                        <Heading size="xs" color="white">
-                          {user.followed.fullName}
-                        </Heading>
-                        <Text fontSize="sm" color="grey">
-                          @{user.followed.userName}
-                        </Text>
-                      </Box>
-                    </HStack>
-                    <Spacer />
-                  </Box>
-                </CardBody>
-              </Card>
-            ))}
+            {isFollowingPending ? (
+              <Spinner color="white" />
+            ) : (
+              listFollowings?.followers.map((user) => (
+                <Card
+                  backgroundColor={"transparent"}
+                  key={user.followed.userName}
+                >
+                  <CardBody paddingTop="0" paddingBottom="2">
+                    <Box display="flex">
+                      <HStack>
+                        <Avatar
+                          boxSize="2.5em"
+                          src={user.followed.photoProfile}
+                          name={user.followed.fullName}
+                        />
+                        <Box>
+                          <Heading size="xs" color="white">
+                            {user.followed.fullName}
+                          </Heading>
+                          <Text fontSize="sm" color="grey">
+                            @{user.followed.userName}
+                          </Text>
+                        </Box>
+                      </HStack>
+                      <Spacer />
+                    </Box>
+                  </CardBody>
+                </Card>
+              ))
+            )}
           </Box>
         </TabPanel>
       </TabPanels>
