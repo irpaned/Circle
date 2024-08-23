@@ -6,7 +6,7 @@ import {
 import { api } from "../libraries/api";
 
 export const useFollowingPage = (userId: number) => {
-  const { data: listFollowings } = useQuery<FollowingsEntity>({
+  const { data: listFollowings, isPending } = useQuery<FollowingsEntity>({
     queryKey: ["followingKey"],
     queryFn: getFollowing,
   });
@@ -22,11 +22,12 @@ export const useFollowingPage = (userId: number) => {
 
   return {
     listFollowings,
+    isPending,
   };
 };
 
 export const useFollowerPage = (userId: number) => {
-  const { data: listFollowers } = useQuery<FollowersEntity>({
+  const { data: listFollowers, isPending } = useQuery<FollowersEntity>({
     queryKey: ["followerKey"],
     queryFn: getFollowers,
   });
@@ -42,5 +43,6 @@ export const useFollowerPage = (userId: number) => {
 
   return {
     listFollowers,
+    isPending,
   };
 };

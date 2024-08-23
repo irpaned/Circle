@@ -36,3 +36,10 @@ export type followeds = {
 export type FollowersEntity = {
   followeds: followeds[];
 };
+
+export type countFollowEntity = {
+  TotalFollower: number;
+  TotalFollowing: number;
+  userName: string;
+  id: number;
+};

@@ -31,6 +31,7 @@ import {
 import { useDisclosure } from "@chakra-ui/react";
 import { EditProfile } from "../../../hooks/use-edit-profile";
 import { Link } from "react-router-dom";
+import { useCountFollow } from "../../../hooks/use-count-follow";
 
 export function Profile() {
   // ini mas cundus coba apakah tombol submitnya jalan
@@ -43,11 +44,11 @@ export function Profile() {
 
   // ini dari redux
   const currentUser = useSelector((state: RootState) => state.auth.user);
-  console.log(currentUser);
 
   const { handleSubmit, onSubmit, register, errors } = EditProfile(
     currentUser.id
   );
+  const { countFollow } = useCountFollow(currentUser.id);
 
   const BoxCSSTop = {
     border: "1px solid rgb(47, 51, 54)",
@@ -224,9 +225,9 @@ export function Profile() {
           </Text>
           <Text>{currentUser.bio}</Text>
           <Box display="flex">
-            <Text marginRight="4px">{currentUser.TotalFolloweds}</Text>
+            <Text marginRight="4px">{countFollow?.TotalFollower}</Text>
             <Text color="grey">Followers</Text>
-            <Text marginLeft="10px">{currentUser.TotalFollowers}</Text>
+            <Text marginLeft="10px">{countFollow?.TotalFollowing}</Text>
             <Text marginLeft="4px" color="grey">
               Following
             </Text>
