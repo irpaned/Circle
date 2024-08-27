@@ -392,8 +392,8 @@ export function DetailThread() {
             </Box>
           )}
         </Box>
-        {thread?.replies?.map((reply, index) => (
-          <Box key={index} sx={BoxCSS}>
+        {thread?.replies?.map((reply) => (
+          <Box key={reply.id} sx={BoxCSS}>
             <Card maxW="100%" bg="black" color="white" padding="0 0 0 0">
               <CardHeader padding="0 0 0 0">
                 <Flex letterSpacing={0.2}>
@@ -402,11 +402,16 @@ export function DetailThread() {
 
                     <div>
                       <Flex gap={2}>
-                        <Heading size="sm">{reply.user?.fullName}</Heading>
-                        <Text color="grey">@{reply.user?.userName}</Text>
+                        <Heading size="sm">
+                          {reply.user?.fullName || "Unknown"}
+                        </Heading>
+                        <Text color="grey">
+                          @{reply.user?.userName || "Unknown"}
+                        </Text>
                         <Text color="grey">●</Text>
                         <Text color="grey">
-                          {dateFormatter(reply.user?.createdAt.toString())}
+                          {dateFormatter(reply?.createdAt.toString()) ||
+                            "Unknown Date"}
                         </Text>
                       </Flex>
 

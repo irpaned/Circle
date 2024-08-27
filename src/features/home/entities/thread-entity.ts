@@ -16,6 +16,7 @@ export type ThreadEntity = {
       userId: number;
       content: string;
       image: string;
+      createdAt: Date;
       user: {
         likes: {
           id: number;
