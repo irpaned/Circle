@@ -60,8 +60,8 @@ export function ThreadCard({ thread }: ThreadCardProps) {
   return (
     <>
       <Box sx={BoxCSS}>
-        <Link to={`/detail-thread/${thread.id}`}>
-          <Card maxW="100%" bg={"black"} color="white" padding="0 0 0 0">
+        <Card maxW="100%" bg={"black"} color="white" padding="0 0 0 0">
+          <Link to={`/detail-thread/${thread.id}`}>
             <CardHeader padding="0 0 0 0">
               <Flex letterSpacing={0.2}>
                 <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
@@ -193,47 +193,48 @@ export function ThreadCard({ thread }: ThreadCardProps) {
               <Text>{thread.content}</Text>
             </CardBody>
             <Image borderRadius="20px" objectFit="cover" src={thread.image} />
-
-            <CardFooter
-              justify="space-between"
-              flexWrap="wrap"
-              sx={{
-                "& > button": {
-                  minW: "136px",
-                },
-              }}
-              paddingBottom="0px"
-              paddingTop="0px"
+          </Link>
+          <CardFooter
+            justify="space-between"
+            flexWrap="wrap"
+            sx={{
+              "& > button": {
+                minW: "136px",
+              },
+            }}
+            paddingBottom="0px"
+            paddingTop="0px"
+          >
+            <Box
+              // backgroundColor={"red"}
+              flex="1"
+              display={"flex"}
+              justifyContent={"center"}
             >
-              <Box
-                // backgroundColor={"red"}
-                flex="1"
-                display={"flex"}
-                justifyContent={"center"}
+              <Button
+                // backgroundColor={"yellow"}
+                onClick={handleLikeThread}
+                color={thread.isLiked ? "red" : "white"}
+                variant="white"
+                leftIcon={<FaRegHeart />}
               >
-                <Button
-                  // backgroundColor={"yellow"}
-                  onClick={handleLikeThread}
-                  color={thread.isLiked ? "red" : "white"}
-                  variant="white"
-                  leftIcon={<FaRegHeart />}
-                >
-                  {thread.TotalLikes}
-                </Button>
-              </Box>
-              <Box
-                // backgroundColor={"green"}
-                flex="1"
-                display={"flex"}
-                justifyContent={"center"}
-              >
+                {thread.TotalLikes}
+              </Button>
+            </Box>
+            <Box
+              // backgroundColor={"green"}
+              flex="1"
+              display={"flex"}
+              justifyContent={"center"}
+            >
+              <Link to={`/detail-thread/${thread.id}`}>
                 <Button flex="1" variant="white" leftIcon={<BiChat />}>
                   {thread.TotalReplies}
                 </Button>
-              </Box>
-            </CardFooter>
-          </Card>
-        </Link>
+              </Link>
+            </Box>
+          </CardFooter>
+        </Card>
       </Box>
     </>
   );
