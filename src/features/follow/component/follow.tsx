@@ -31,8 +31,6 @@
 //   const { listFollowings, isPending } = useFollowingPage(currentUser.id);
 //   const { listFollowers, isPending } = useFollowerPage(currentUser.id);
 
-//   console.log("cek", listFollowings);
-
 //   return (
 //     <Tabs mt={"0"} isFitted variant="enclosed">
 //       <TabList border={"none"} mb="1em">

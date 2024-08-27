@@ -4,7 +4,6 @@ import { useProfilePage } from "../hooks/use-profile-page.tsx";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store.ts";
 import { ThreadCard } from "../features/home/component/thread-card.tsx";
-import { MediaCard } from "../features/home/component/media-card.tsx";
 
 export function MyProfile() {
   const currentUser = useSelector((state: RootState) => state.auth.user);

@@ -20,7 +20,7 @@ export const EditThread = (id: number) => {
   });
 
   async function getThread() {
-    const response = await api.get("/threads/" + id, {
+    const response = await api.get("/thread/" + id, {
       headers: {
         Authorization: `Bearer ${localStorage.token}`,
       },
@@ -32,8 +32,6 @@ export const EditThread = (id: number) => {
     getThread();
   }, []);
 
-  // console.log(currentUser);
-
   const {
     register,
     handleSubmit,
@@ -43,11 +41,10 @@ export const EditThread = (id: number) => {
     resolver: zodResolver(createThreadSchemaZod),
   });
 
-  //   cundus
   const { mutateAsync } = useMutation({
     mutationFn: async (newThread) => {
       console.log(newThread);
-      const response = await api.patch("/threads/" + id, newThread, {
+      const response = await api.patch("/thread/" + id, newThread, {
         headers: {
           Authorization: `Bearer ${localStorage.token}`,
         },
@@ -57,13 +54,14 @@ export const EditThread = (id: number) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["threadsKey"] });
       queryClient.invalidateQueries({ queryKey: ["mythreads"] });
+      queryClient.invalidateQueries({ queryKey: ["detailThreadsKey"] });
     },
   });
 
   const onSubmit: SubmitHandler<UpdateThread> = async (data) => {
     try {
       console.log("menjalankan update threads");
-      await mutateAsync(data as any); // cundus
+      await mutateAsync(data as any);
       refetch();
     } catch (error) {
       console.log(error);

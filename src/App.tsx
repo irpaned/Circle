@@ -47,7 +47,6 @@
 
 //   async function authCheck() {
 //     try {
-//       console.log("OKKKKKKKKKK");
 //       const token = localStorage.token;
 //       const response = await api.post(
 //         "/auth/check",
@@ -75,7 +74,6 @@
 //     }
 //   }
 
-//   console.log("DIKA NICH");
 //   useEffect(() => {
 //     const token = localStorage.token;
 
@@ -129,6 +127,7 @@ import { RootState } from "./redux/store";
 import { Reset } from "./pages/10.reset";
 import { ResetPassword } from "./pages/9.reset-password";
 import FollowPage from "./layouts/follow";
+import Detailthread from "./layouts/detail-thread";
 // import { Forgot } from "./pages/10.forgot-password";
 
 function App() {
@@ -141,7 +140,6 @@ function App() {
 
   const PrivateRoute = () => {
     if (!isLoading) {
-      console.log("test", currentUser);
       if (currentUser) return <Outlet />;
 
       return <Navigate to={"/auth/login"} />;
@@ -152,7 +150,6 @@ function App() {
 
   async function authCheck() {
     try {
-      console.log("test");
       const token = localStorage.token;
       const response = await api.post(
         "/auth/check",
@@ -163,17 +160,15 @@ function App() {
           },
         }
       );
-      console.log("res", response);
       dispatch(
         SET_USER({
           ...response.data,
           // cara hitung length dari redux
-          TotalFolloweds: response.data.followeds.length,
-          TotalFollowers: response.data.followers.length,
+          // TotalFolloweds: response.data.followeds.length,
+          // TotalFollowers: response.data.followers.length,
         })
       );
       setIsLoading(false);
-      console.log("kamu sudah login", response.data);
     } catch (error) {
       localStorage.removeItem("token");
       setIsLoading(false);
@@ -182,7 +177,6 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.token;
-    console.log("cek token", token);
     if (token) authCheck();
   }, []);
 
@@ -202,6 +196,7 @@ function App() {
         {/* <Route path="/search" element={<SearchPage />} /> */}
         <Route path="/search" element={<Search />} />
         <Route path="/follow" element={<FollowPage />} />
+        <Route path="/detail-thread/:id" element={<Detailthread />} />
         {/* <Route path="/searchTest" element={<SearchPageTest/>}/> */}
 
         <Route path="/dashboard" element={<Dashboard />} />

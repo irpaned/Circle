@@ -4,7 +4,7 @@ import { ThreadEntity } from "../features/home/entities/thread-entity";
 import { api } from "../libraries/api";
 import { useEffect } from "react";
 
-export const DeleteThread = (id: number) => {
+export const DeleteReply = (id: number) => {
   const queryClient = useQueryClient();
 
   const { data: deleteThread, refetch } = useQuery<ThreadEntity[]>({

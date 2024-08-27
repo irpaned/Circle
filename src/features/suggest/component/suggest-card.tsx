@@ -31,7 +31,7 @@ export function SuggestCard({
     // <CardBody paddingTop="0" paddingBottom="0" height={"25px"}>
     <Box display="flex" paddingBottom={2}>
       <HStack>
-        <Avatar boxSize="2.5em" src={photoProfile} name={fullName} />
+        <Avatar boxSize="2.5em" src={photoProfile} />
         <Box>
           <Heading size="xs" color="white">
             {fullName}

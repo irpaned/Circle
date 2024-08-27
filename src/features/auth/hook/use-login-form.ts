@@ -2,19 +2,15 @@ import { useToast } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../libraries/api";
-import { SET_USER } from "../../../redux/slices/auth";
 import { LoginType } from "../types/login-type";
 import { LoginSchemaZod } from "../validators/login-form";
-import { RootState } from "../../../redux/store";
 
 export const useLoginForm = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const toast = useToast();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const {
@@ -51,7 +47,6 @@ export const useLoginForm = () => {
         duration: 3000,
         isClosable: true,
       });
-      console.log("ini error", error);
     }
   };
 

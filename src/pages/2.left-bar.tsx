@@ -25,12 +25,13 @@ import { FaImage, FaRegHeart } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { TbLogout2 } from "react-icons/tb";
 import { useHomePage } from "../hooks/use-home-page";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function LeftBar() {
+  const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "auth/login";
+    navigate("/auth/login");
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();

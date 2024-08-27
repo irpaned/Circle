@@ -23,7 +23,6 @@ export const useResetPasswordForm = () => {
   const onSubmit: SubmitHandler<ResetPassword> = async (data) => {
     try {
       const response = await api.patch("/auth/resetpassword", data);
-      console.log("response", response.data);
 
       const token = response.data.token;
 

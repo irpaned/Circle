@@ -24,11 +24,9 @@ export const useRegisterForm = () => {
   const onSubmit: SubmitHandler<RegisterForm> = async (data) => {
     try {
       const response = await api.post("/auth/register", data);
-      console.log("response", response.data);
 
       const token = response.data.token;
 
-      // cara bacanya apabila betulan token maka akan dimasukkan ke localstorage kita 1:21:05 day 8
       if (token) {
         localStorage.setItem("token", token);
       }

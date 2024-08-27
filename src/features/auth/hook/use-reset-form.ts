@@ -24,7 +24,6 @@ export const useResetForm = () => {
   const onSubmit: SubmitHandler<ResetForm> = async (data) => {
     try {
       const response = await api.post("/auth/reset-password", data);
-      console.log("response", response.data);
 
       const token = response.data.token;
 
