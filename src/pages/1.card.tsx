@@ -178,9 +178,10 @@ export function CardBeranda() {
             </Box>
           )}
         </Box>
-        {threads?.map((thread) => (
-          <ThreadCard key={thread.id} thread={thread} />
-        ))}
+        {Array.isArray(threads) &&
+          threads.map((thread) => (
+            <ThreadCard key={thread.id} thread={thread} />
+          ))}
       </Box>
     </Box>
   );
