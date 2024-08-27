@@ -61,134 +61,134 @@ export function ThreadCard({ thread }: ThreadCardProps) {
     <>
       <Box sx={BoxCSS}>
         <Card maxW="100%" bg={"black"} color="white" padding="0 0 0 0">
-          <Link to={`/detail-thread/${thread.id}`}>
-            <CardHeader padding="0 0 0 0">
-              <Flex letterSpacing={0.2}>
-                <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-                  <Avatar src={thread?.user?.photoProfile} />
+          <CardHeader padding="0 0 0 0">
+            <Flex letterSpacing={0.2}>
+              <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
+                <Avatar src={thread?.user?.photoProfile} />
 
-                  <Flex gap={2}>
-                    <Heading size="sm">{thread?.user?.fullName}</Heading>
-                    <Text color="grey">@{thread?.user?.userName}</Text>
-                    <Text color="grey">●</Text>
-                    <Text color="grey">
-                      {dateFormatter(thread.createdAt.toString())}
-                    </Text>
-                  </Flex>
+                <Flex gap={2}>
+                  <Heading size="sm">{thread?.user?.fullName}</Heading>
+                  <Text color="grey">@{thread?.user?.userName}</Text>
+                  <Text color="grey">●</Text>
+                  <Text color="grey">
+                    {dateFormatter(thread.createdAt.toString())}
+                  </Text>
                 </Flex>
+              </Flex>
 
-                <Menu>
-                  <MenuButton
-                    as={IconButton}
-                    aria-label="Options"
-                    icon={<BsThreeDots />}
-                    variant="outline"
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  aria-label="Options"
+                  icon={<BsThreeDots />}
+                  variant="outline"
+                  color={"white"}
+                  border={"none"}
+                  mt={"5px"}
+                  _hover={{
+                    color: "brand.900",
+                  }}
+                  _active={{
+                    bg: "black",
+                  }}
+                />
+                <MenuList
+                  boxShadow={"0 0 7px 1px rgba(255, 255, 255, 0.5)"}
+                  border={"none"}
+                  bg={"black"}
+                  p="10px 10px 10px 10px"
+                  borderRadius={"10px"}
+                >
+                  <Button
+                    justifyContent={"start"}
+                    gap={2}
                     color={"white"}
-                    border={"none"}
-                    mt={"5px"}
+                    fontWeight={"bold"}
+                    fontSize={"15px"}
+                    bg={"black"}
+                    onClick={() => {
+                      onDelete({ id: thread.id });
+                      onClose();
+                    }}
+                    w="100%"
+                    paddingLeft={"1.5"}
                     _hover={{
-                      color: "brand.900",
+                      bg: "rgba(255, 255, 255, 0.2)",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <Icon as={RiDeleteBin5Line} fontSize={"18px"} />
+                    <Text letterSpacing={0.5}>Delete</Text>
+                  </Button>
+                  <Button
+                    justifyContent={"start"}
+                    gap={2}
+                    onClick={() => {
+                      onOpen();
+                    }}
+                    color={"white"}
+                    fontWeight={"bold"}
+                    fontSize={"15px"}
+                    bg={"black"}
+                    w="100%"
+                    paddingLeft={"1.5"}
+                    _hover={{
+                      bg: "rgba(255, 255, 255, 0.2)",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <Icon as={MdOutlineModeEdit} fontSize={"18px"} />
+                    <Text>Edit</Text>
+                  </Button>
+                </MenuList>
+              </Menu>
+            </Flex>
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent
+                color={"white"}
+                bg={"black"}
+                boxShadow={"0 0 7px 1px rgba(255, 255, 255, 0.5)"}
+                borderRadius="20px"
+              >
+                <ModalHeader>Edit Thread</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <FormControl>
+                    <Input
+                      {...register("content")}
+                      defaultValue={thread.content}
+                      border="1px solid #8E8E8E"
+                      placeholder="Content"
+                    />
+                  </FormControl>
+                </ModalBody>
+
+                <ModalFooter>
+                  <Button
+                    isDisabled={
+                      !!(errors.content?.message || errors.image?.message)
+                    }
+                    bg={"brand.900"}
+                    mr={3}
+                    type="submit"
+                    onClick={handleSubmit(onSubmit)}
+                    color={"white"}
+                    _hover={{
+                      color: "brand.800",
+                      bg: "#039B1C",
                     }}
                     _active={{
-                      bg: "black",
+                      bg: "#05831A",
                     }}
-                  />
-                  <MenuList
-                    boxShadow={"0 0 7px 1px rgba(255, 255, 255, 0.5)"}
-                    border={"none"}
-                    bg={"black"}
-                    p="10px 10px 10px 10px"
-                    borderRadius={"10px"}
                   >
-                    <Button
-                      justifyContent={"start"}
-                      gap={2}
-                      color={"white"}
-                      fontWeight={"bold"}
-                      fontSize={"15px"}
-                      bg={"black"}
-                      onClick={() => {
-                        onDelete({ id: thread.id });
-                        onClose();
-                      }}
-                      w="100%"
-                      paddingLeft={"1.5"}
-                      _hover={{
-                        bg: "rgba(255, 255, 255, 0.2)",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      <Icon as={RiDeleteBin5Line} fontSize={"18px"} />
-                      <Text letterSpacing={0.5}>Delete</Text>
-                    </Button>
-                    <Button
-                      justifyContent={"start"}
-                      gap={2}
-                      onClick={() => {
-                        onOpen();
-                      }}
-                      color={"white"}
-                      fontWeight={"bold"}
-                      fontSize={"15px"}
-                      bg={"black"}
-                      w="100%"
-                      paddingLeft={"1.5"}
-                      _hover={{
-                        bg: "rgba(255, 255, 255, 0.2)",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      <Icon as={MdOutlineModeEdit} fontSize={"18px"} />
-                      <Text>Edit</Text>
-                    </Button>
-                  </MenuList>
-                </Menu>
-              </Flex>
-              <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent
-                  color={"white"}
-                  bg={"black"}
-                  boxShadow={"0 0 7px 1px rgba(255, 255, 255, 0.5)"}
-                  borderRadius="20px"
-                >
-                  <ModalHeader>Edit Thread</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    <FormControl>
-                      <Input
-                        {...register("content")}
-                        defaultValue={thread.content}
-                        border="1px solid #8E8E8E"
-                        placeholder="Content"
-                      />
-                    </FormControl>
-                  </ModalBody>
-
-                  <ModalFooter>
-                    <Button
-                      isDisabled={
-                        !!(errors.content?.message || errors.image?.message)
-                      }
-                      bg={"brand.900"}
-                      mr={3}
-                      type="submit"
-                      onClick={handleSubmit(onSubmit)}
-                      color={"white"}
-                      _hover={{
-                        color: "brand.800",
-                        bg: "#039B1C",
-                      }}
-                      _active={{
-                        bg: "#05831A",
-                      }}
-                    >
-                      Save
-                    </Button>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal>
-            </CardHeader>
+                    Save
+                  </Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
+          </CardHeader>
+          <Link to={`/detail-thread/${thread.id}`}>
             <CardBody p="8px 0 8px 5px">
               <Text>{thread.content}</Text>
             </CardBody>
